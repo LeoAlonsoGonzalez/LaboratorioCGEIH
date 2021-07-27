@@ -1,15 +1,16 @@
 # Blender MTL File: 'casaLeo.blend'
-# Material Count: 5
+# Material Count: 6
 
-newmtl Material.004
+newmtl Material.001
 Ns 225.000000
 Ka 1.000000 1.000000 1.000000
-Kd 0.447978 0.447978 0.447978
+Kd 0.800000 0.800000 0.800000
 Ks 0.500000 0.500000 0.500000
 Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
+map_Kd agua2.jpg
 
 newmtl Material.006
 Ns 225.000000
@@ -22,7 +23,7 @@ d 1.000000
 illum 2
 map_Kd pared.PNG
 
-newmtl cristal
+newmtl concreto
 Ns 225.000000
 Ka 1.000000 1.000000 1.000000
 Kd 0.800000 0.800000 0.800000
@@ -31,7 +32,7 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd toppng.com-transparent-glass-effect-366x540.png
+map_Kd concrete_solid_5-l-color.jpg
 
 newmtl pared.gris
 Ns 225.000000
@@ -54,3 +55,14 @@ Ni 1.450000
 d 1.000000
 illum 2
 map_Kd fabric_solid_18-m-color.jpg
+
+newmtl pasto
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd GrassSamp1.jpg

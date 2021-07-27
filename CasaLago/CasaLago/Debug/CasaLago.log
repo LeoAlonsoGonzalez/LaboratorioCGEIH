@@ -1,9 +1,9 @@
 ﻿  Main_prac11.cpp
-c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(411): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(771): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(772): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(776): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(777): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(779): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
-c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(780): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(413): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(791): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(792): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(796): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(797): warning C4244: 'inicializando': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(799): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
+c:\users\leonardo\documents\github\laboratoriocgeih\casalago\casalago\main_prac11.cpp(800): warning C4244: '=': conversión de 'double' a 'GLfloat'; posible pérdida de datos
   casalago.vcxproj -> C:\Users\Leonardo\Documents\GitHub\LaboratorioCGEIH\casalago\Debug\casalago.exe

@@ -196,10 +196,12 @@ int main()
 
 	Model Carroseria((char*)"Models/Carro/Carroseria.obj");
 	Model LLanta((char*)"Models/Carro/Wheel.obj");
+	Model calle((char *)"Models/camino/calle.obj");
 	
 
 	Model cama((char *)"Models/cama/Single_Bed.obj");
 	Model casa((char *)"Models/casa/casaLeo.obj");
+	Model casa_c((char *)"Models/casa/casaLeocristales.obj");
 	Model mesa_s((char*)"Models/silla_mesa2/Garden_Furniture.obj");
 	Model mesa_cafe((char*)"Models/mesa_baja/CoffeeTable1.obj");
 	
@@ -582,8 +584,8 @@ int main()
 
 		glBindVertexArray(0);
 
-		//Carga de modelo de lacasa
-		//Casa 
+		//Carga de modelo de la casa
+		//casa
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
 		model = glm::translate(model, PosIniAuto + glm::vec3(10, 0, 10));
@@ -591,6 +593,15 @@ int main()
 		//model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		casa.Draw(lightingShader);
+
+		//cristales de la casa
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, PosIniAuto + glm::vec3(10, 0, 10));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		//model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		casa_c.Draw(lightingShader);
 
 		//cama
 		view = camera.GetViewMatrix();
@@ -603,7 +614,7 @@ int main()
 		//mesa con silla
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX + 28.0f, posY, posZ + 15.0f));
+		model = glm::translate(model, glm::vec3(posX + 33.0f, posY, posZ + 15.0f));
 		//model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		mesa_s.Draw(lightingShader);
@@ -612,7 +623,7 @@ int main()
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
 		model = glm::translate(model, glm::vec3(posX + 35.0f, posY, posZ + 10.0f));
-		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
+		model = glm::scale(model, glm::vec3(0.025f, 0.025f, 0.025f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		mesa_cafe.Draw(lightingShader);
 
@@ -622,6 +633,15 @@ int main()
 		modelLoc = glGetUniformLocation(lampShader.Program, "model");
 		viewLoc = glGetUniformLocation(lampShader.Program, "view");
 		projLoc = glGetUniformLocation(lampShader.Program, "projection");
+
+		//camino
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 10.0f, posY, posZ + 55));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		calle.Draw(lightingShader);
 
 		// Set matrices
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
