@@ -198,10 +198,10 @@ int main()
 	Model LLanta((char*)"Models/Carro/Wheel.obj");
 	
 
-	Model mesa((char *)"Models/mesa_baja/CoffeeTable1.obj");
-	Model silla((char *)"Models/silla_mesa2/Garden_Furniture.obj");
+	Model cama((char *)"Models/cama/Single_Bed.obj");
 	Model casa((char *)"Models/casa/casaLeo.obj");
-
+	Model mesa_s((char*)"Models/silla_mesa2/Garden_Furniture.obj");
+	Model mesa_cafe((char*)"Models/mesa_baja/CoffeeTable1.obj");
 	
 	// Build and compile our shader program
 
@@ -583,7 +583,7 @@ int main()
 		glBindVertexArray(0);
 
 		//Carga de modelo de lacasa
-		//Villa F
+		//Casa 
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
 		model = glm::translate(model, PosIniAuto + glm::vec3(10, 0, 10));
@@ -592,23 +592,29 @@ int main()
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		casa.Draw(lightingShader);
 
-		//mesa
+		//cama
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
 		model = glm::translate(model, glm::vec3(posX+10.0f, posY, posZ));
-		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
+		//model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		mesa.Draw(lightingShader);
+		cama.Draw(lightingShader);
 
-		//silla
+		//mesa con silla
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX+5, posY, posZ));
-		model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
+		model = glm::translate(model, glm::vec3(posX + 28.0f, posY, posZ + 15.0f));
+		//model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		silla.Draw(lightingShader);
+		mesa_s.Draw(lightingShader);
 
-
+		//mesa para café
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 35.0f, posY, posZ + 10.0f));
+		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		mesa_cafe.Draw(lightingShader);
 
 		// Also draw the lamp object, again binding the appropriate shader
 		lampShader.Use();
