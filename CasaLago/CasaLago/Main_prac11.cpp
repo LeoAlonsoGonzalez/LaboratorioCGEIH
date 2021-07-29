@@ -204,6 +204,8 @@ int main()
 	Model casa_c((char *)"Models/casa/casaLeocristales.obj");
 	Model mesa_s((char*)"Models/silla_mesa2/Garden_Furniture.obj");
 	Model mesa_cafe((char*)"Models/mesa_baja/CoffeeTable1.obj");
+	Model sunbed((char*)"Models/sunbed/camastro.obj");
+	Model estante((char*)"Models/mueble_alto/mueble.obj");
 	
 	// Build and compile our shader program
 
@@ -588,33 +590,57 @@ int main()
 		//casa
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, PosIniAuto + glm::vec3(10, 0, 10));
+		model = glm::translate(model, PosIniAuto + glm::vec3(5, 0, -20));
 		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
-		//model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		casa.Draw(lightingShader);
 
 		//cristales de la casa
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, PosIniAuto + glm::vec3(10, 0, 10));
+		model = glm::translate(model, PosIniAuto + glm::vec3(5, 0, -20));
 		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
-		//model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		casa_c.Draw(lightingShader);
+		//casa_c.Draw(lightingShader);
 
-		//cama
+		//cama 1 
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX+10.0f, posY, posZ));
-		//model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
+		model = glm::translate(model, glm::vec3(posX + 25, posY + 3.8, posZ - 8.8));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		cama.Draw(lightingShader);
+
+		//cama 2
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 38, posY + 3.8, posZ - 8.8));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		cama.Draw(lightingShader);
+
+		//cama 3
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 40, posY + 3.8, posZ - 3));
+		model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		cama.Draw(lightingShader);
+
+		//cama 4
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 25, posY + 3.8, posZ - 3));
+		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		cama.Draw(lightingShader);
 
 		//mesa con silla
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX + 33.0f, posY, posZ + 15.0f));
+		model = glm::translate(model, glm::vec3(posX + 26.0f, posY, posZ - 10.0f));
 		//model = glm::scale(model, glm::vec3(0.8f, 0.8f, 0.8f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		mesa_s.Draw(lightingShader);
@@ -622,10 +648,44 @@ int main()
 		//mesa para café
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX + 35.0f, posY, posZ + 10.0f));
-		model = glm::scale(model, glm::vec3(0.025f, 0.025f, 0.025f));
+		model = glm::translate(model, glm::vec3(posX + 32.0f, posY, posZ - 19.0f));
+		model = glm::scale(model, glm::vec3(0.03f, 0.03f, 0.03f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		mesa_cafe.Draw(lightingShader);
+
+		//sunbed 1
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 27.0f, posY, posZ - 29.0f));
+		model = glm::rotate(model, glm::radians(-60.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		sunbed.Draw(lightingShader);
+
+		//sunbed 2
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 27.0f, posY, posZ - 32.0f));
+		model = glm::rotate(model, glm::radians(-60.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		sunbed.Draw(lightingShader);
+
+		//librero 1
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 41.5f, posY, posZ - 6.0f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0f, 0.7f, 1.0f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		estante.Draw(lightingShader);
+
+		//librero 2
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, glm::vec3(posX + 41.5f, posY, posZ - 13.5f));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.0f, 0.7f, 1.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		estante.Draw(lightingShader);
 
 		// Also draw the lamp object, again binding the appropriate shader
 		lampShader.Use();
@@ -634,14 +694,6 @@ int main()
 		viewLoc = glGetUniformLocation(lampShader.Program, "view");
 		projLoc = glGetUniformLocation(lampShader.Program, "projection");
 
-		//camino
-		view = camera.GetViewMatrix();
-		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX + 10.0f, posY, posZ + 55));
-		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
-		model = glm::scale(model, glm::vec3(10.0f, 10.0f, 10.0f));
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		calle.Draw(lightingShader);
 
 		// Set matrices
 		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
