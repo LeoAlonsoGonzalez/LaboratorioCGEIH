@@ -1,4 +1,7 @@
 
+casalago/Debug/
+CasaLago/CasaLago/Debug/
+casalago/.vs/casalago/v15/
 casalago/.vs/casalago/v15/.suo
 casalago/.vs/casalago/v15/Browse.VC.db
 casalago/.vs/casalago/v15/Browse.VC.opendb
@@ -59,3 +62,6 @@ casalago/Debug/casalago.exe
 casalago/Debug/casalago.ilk
 casalago/Debug/casalago.pdb
 casalago/desktop.ini
+CasaLago/CasaLago/Debug/CasaLago.log
+CasaLago/CasaLago/Debug/CasaLago.tlog/link.read.1.tlog
+CasaLago/CasaLago/Debug/Main_prac11.obj

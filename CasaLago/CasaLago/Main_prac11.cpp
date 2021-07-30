@@ -96,6 +96,10 @@ float movKitX = 0.0;
 float movKitZ = 0.0;
 float rotKit = 0.0;//orientación de la animación inicial
 
+float mov_vet_lat = 0.0;
+float mov_vet_sup = 0.0;
+float mov_vet_tra = 0.0;
+
 bool circuito = false;
 bool recorrido1 = true;
 bool recorrido2 = false;
@@ -196,19 +200,26 @@ int main()
 
 	Model Carroseria((char*)"Models/Carro/Carroseria.obj");
 	Model LLanta((char*)"Models/Carro/Wheel.obj");
-	Model calle((char *)"Models/camino/calle.obj"); 
 	Model arbusto((char *)"Models/arbusto/arbusto.obj");
 	
 
 	Model cama((char *)"Models/cama/Single_Bed.obj");
 	Model casa((char *)"Models/casa/casaLeo.obj");
-	Model casa_c((char *)"Models/casa/casaLeocristales.obj");
+	Model casa_c((char *)"Models/casa/casaLeocristales1.obj");
 	Model mesa_s((char*)"Models/silla_mesa2/Garden_Furniture.obj");
 	Model mesa_cafe((char*)"Models/mesa_baja/CoffeeTable1.obj");
 	Model sunbed((char*)"Models/sunbed/camastro.obj");
 	Model estante((char*)"Models/mueble_alto/mueble.obj");
 	Model libros((char*)"Models/libros/book.obj");
 	
+	Model puerta((char *)"Models/casa/puerta_princ.obj");
+	Model v_lat((char *)"Models/casa/ventanal_lat.obj");
+	Model v_sup((char *)"Models/casa/ventanal_sup.obj");
+	Model v_tra((char *)"Models/casa/ventanal_trasero.obj");
+	Model v_sup_gra((char *)"Models/casa/ventanales_sup.obj");
+
+
+
 	// Build and compile our shader program
 
 	//Inicialización de KeyFrames
@@ -605,7 +616,46 @@ int main()
 		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		//casa_c.Draw(lightingShader);
+		casa_c.Draw(lightingShader);
+
+		//cristales laterales planta baja junto a los estantes grandes
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, PosIniAuto + glm::vec3(5, 0, -20 + mov_vet_lat));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		v_lat.Draw(lightingShader);
+
+
+		//cristales superiores de los cuartos pequeños
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, PosIniAuto + glm::vec3(5 - mov_vet_sup, 0, -20));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		v_sup.Draw(lightingShader);
+
+		//cristales superiores grandes
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, PosIniAuto + glm::vec3(5 + mov_vet_tra, 0, -20));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		v_sup_gra.Draw(lightingShader);
+
+
+		//cristal trasero 1 planta
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, PosIniAuto + glm::vec3(5 + mov_vet_tra, 0, -20));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		v_tra.Draw(lightingShader);
+
 
 		//cama 1 
 		view = camera.GetViewMatrix();
@@ -1185,48 +1235,48 @@ void DoMovement()
 
 	if (keys[GLFW_KEY_1])
 	{
-
-		rot += 1;
-
+		if (mov_vet_lat >= 0) {
+			mov_vet_lat -= 0.1f;
+			printf("ventanas laterales %f\n", mov_vet_lat);
+		}
 	}
-
 	if (keys[GLFW_KEY_2])
 	{
-		if (rotRodIzq<80.0f)
-			rotRodIzq += 1.0f;
-			
+		if (mov_vet_lat <= 3) {
+			mov_vet_lat += 0.1f;
+			printf("ventanas laterales %f\n", mov_vet_lat);
+		}
 	}
 
 	if (keys[GLFW_KEY_3])
 	{
-		if (rotRodIzq>-45)
-			rotRodIzq -= 1.0f;
-		
+		if (mov_vet_tra >= 0) {
+			mov_vet_tra -= 0.1f;
+			printf("ventana trasera %f\n", mov_vet_tra);
+		}
 	}
-
-	
-
-	//Mov Personaje
-	if (keys[GLFW_KEY_H])
+	if (keys[GLFW_KEY_4])
 	{
-		posZ += 1;
+		if (mov_vet_tra <= 3) {
+			mov_vet_tra += 0.1f;
+			printf("ventana trasera %f\n", mov_vet_tra);
+		}
 	}
 
-	if (keys[GLFW_KEY_Y])
+	if (keys[GLFW_KEY_5])
 	{
-		posZ -= 1;
+		if (mov_vet_sup >= 0) {
+			mov_vet_sup -= 0.1f;
+			printf("ventanas cuartos pequeños %f\n", mov_vet_sup);
+		}
 	}
-
-	if (keys[GLFW_KEY_G])
+	if (keys[GLFW_KEY_6])
 	{
-		posX -= 1;
+		if (mov_vet_sup <= 2) {
+			mov_vet_sup += 0.1f;
+			printf("ventanas cuartos pequeños %f\n", mov_vet_sup);
+		}
 	}
-
-	if (keys[GLFW_KEY_J])
-	{
-		posX += 1;
-	}
-
 
 
 
