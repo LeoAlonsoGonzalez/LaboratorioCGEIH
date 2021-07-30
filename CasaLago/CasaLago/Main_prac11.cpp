@@ -32,11 +32,11 @@ void DoMovement();
 void animacion();
 
 // Window dimensions
-const GLuint WIDTH = 1280, HEIGHT = 720;
+const GLuint WIDTH = 1024, HEIGHT = 680;
 int SCREEN_WIDTH, SCREEN_HEIGHT;
 
 // Camera
-Camera  camera(glm::vec3(-63.0f, 3.0f, -15.0f));
+Camera  camera(glm::vec3(-63.0f, 2.5f, -35.0f));
 GLfloat lastX = WIDTH / 2.0;
 GLfloat lastY = HEIGHT / 2.0;
 bool keys[1024];
@@ -48,7 +48,9 @@ float rot = 0.0f;
 // Light attributes
 glm::vec3 lightPos(0.0f, 0.0f, 0.0f);
 glm::vec3 PosIni(-95.0f, 1.0f, -45.0f);
+glm::vec3 PosIni_a(-75.0f, 1.0f, -45.0f);
 glm::vec3 PosIniAuto(-75.0f, 1.0f, -45.0f);
+glm::vec3 PosIniAuto_a(-75.0f, 1.0f, -45.0f);
 bool active;
 
 
@@ -95,6 +97,9 @@ glm::vec3 LightP1;
 float movKitX = 0.0;
 float movKitZ = 0.0;
 float rotKit = 0.0;//orientación de la animación inicial
+float movKitX_a = 0.0;//para la caida del libro
+float movKitZ_a = 0.0;//para la caida del libro
+float rotKit_a = 0.0;//orientación del libro inicial
 
 float mov_vet_lat = 0.0;
 float mov_vet_sup = 0.0;
@@ -106,7 +111,17 @@ bool recorrido2 = false;
 bool recorrido3 = false;
 bool recorrido4 = false;
 bool recorrido5 = false;
-
+bool recorrido6 = false;
+bool recorrido7 = false;
+bool recorrido8 = false;
+bool recorrido9 = false;
+bool recorrido10 = false;
+bool recorrido11 = false;
+bool recorrido12 = false;
+bool recorrido13 = false;
+bool recorrido14 = false;
+bool recorrido15 = false;
+bool recorrido16 = false;
 
 void saveFrame(void)
 {
@@ -538,7 +553,6 @@ int main()
 		glm::mat4 tmp = glm::mat4(1.0f); //Temp
 
 		//Carga de modelos
-		
 		view = camera.GetViewMatrix();
 		glm::mat4 model(1);
 		tmp = model = glm::translate(model, glm::vec3(0, 1, 0));
@@ -548,8 +562,8 @@ int main()
 		//Carroceria
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, PosIniAuto + glm::vec3(movKitX, 0, movKitZ));
-		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::translate(model, PosIniAuto_a + glm::vec3(movKitX_a, 0, movKitZ_a));
+		model = glm::rotate(model, glm::radians(rotKit_a), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		Carroseria.Draw(lightingShader);
@@ -557,18 +571,19 @@ int main()
 		//Llanta Delantera Der
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, PosIniAuto + glm::vec3(movKitX, 0, movKitZ));
-		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::translate(model, PosIniAuto_a + glm::vec3(movKitX_a, 0, movKitZ_a));
+		model = glm::rotate(model, glm::radians(rotKit_a), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::translate(model, glm::vec3(1.7f, 0.5f, 2.6f));;
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
+		//model = glm::rotate(model, glm::radians(rotKit_der), glm::vec3(0.0f, 0.0f, 1.0));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		LLanta.Draw(lightingShader);
 
 		//Llanta Trasera Der
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, PosIniAuto + glm::vec3(movKitX, 0, movKitZ));
-		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::translate(model, PosIniAuto_a + glm::vec3(movKitX_a, 0, movKitZ_a));
+		model = glm::rotate(model, glm::radians(rotKit_a), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::translate(model, glm::vec3(1.7f, 0.5f, -2.9f));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -578,19 +593,20 @@ int main()
 		//Llanta Delantera Izq
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, PosIniAuto + glm::vec3(movKitX, 0, movKitZ));
-		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::translate(model, PosIniAuto_a + glm::vec3(movKitX_a, 0, movKitZ_a));
+		model = glm::rotate(model, glm::radians(rotKit_a), glm::vec3(0.0, 1.0, 0.0));
 		model = glm::translate(model, glm::vec3(-1.7f, 0.8f, 2.6f));
-		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0));
+		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.0));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
+		//model = glm::rotate(model, glm::radians(rotKit_izq), glm::vec3(0.0, 0.0, 1.0));//vista de frente
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		LLanta.Draw(lightingShader);
 
 		//Llanta Trasera Izq
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, PosIniAuto + glm::vec3(movKitX, 0, movKitZ));
-		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::translate(model, PosIniAuto_a + glm::vec3(movKitX_a, 0, movKitZ_a));
+		model = glm::rotate(model, glm::radians(rotKit_a), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::translate(model, glm::vec3(-1.7f, 0.8f, -2.9f));
 		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0));
 		model = glm::scale(model, glm::vec3(0.02f, 0.02f, 0.02f));
@@ -608,6 +624,15 @@ int main()
 		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		casa.Draw(lightingShader);
+
+		//puerta principal
+		view = camera.GetViewMatrix();
+		model = glm::mat4(1);
+		model = glm::translate(model, PosIniAuto + glm::vec3(5 - mov_vet_sup, 0, -20));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 1.0f, 0.0));
+		model = glm::scale(model, glm::vec3(1.5f, 1.5f, 1.5f));
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+		puerta.Draw(lightingShader);
 
 		//cristales de la casa
 		view = camera.GetViewMatrix();
@@ -684,7 +709,7 @@ int main()
 		//cama 4
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX + 24.6, posY + 3.8, posZ - 3.5));
+		model = glm::translate(model, glm::vec3(posX + 24.65, posY + 3.8, posZ - 3.5));
 		model = glm::rotate(model, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		cama.Draw(lightingShader);
@@ -733,7 +758,8 @@ int main()
 		//libros librero 1
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX + 40.5f, posY + 2.13f, posZ - 5.8f));
+		model = glm::translate(model, glm::vec3(posX + 40.5f , posY + 2.13f , posZ - 5.8f));
+		model = glm::rotate(model, glm::radians(rotKit), glm::vec3(0.0f, 0.0f, 1.0));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 		libros.Draw(lightingShader);
 
@@ -747,7 +773,7 @@ int main()
 		//librero 2
 		view = camera.GetViewMatrix();
 		model = glm::mat4(1);
-		model = glm::translate(model, glm::vec3(posX + 41.5f, posY, posZ - 13.5f));
+		model = glm::translate(model, glm::vec3(posX + 41.5f, posY, posZ - 13.4f));
 		model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 0.0));
 		model = glm::scale(model, glm::vec3(1.0f, 0.7f, 1.5f));
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
@@ -1114,40 +1140,220 @@ int main()
 void animacion()
 {
 
-		//Movimiento del personaje
+	//Movimiento del coche
+	if (circuito)
+	{
 
-		if (play)
+		
+		if (recorrido1)
 		{
-			if (i_curr_steps >= i_max_steps) //end of animation between frames?
+			movKitZ_a += 0.4f;
+			if (movKitZ_a > 15)
 			{
-				playIndex++;
-				if (playIndex>FrameIndex - 2)	//end of total animation?
-				{
-					printf("termina anim\n");
-					playIndex = 0;
-					play = false;
-				}
-				else //Next frame interpolations
-				{
-					i_curr_steps = 0; //Reset counter
-									  //Interpolation
-					interpolation();
-				}
+				recorrido1 = false;
+				recorrido2 = true;
 			}
-			else
-			{
-				//Draw animation
-				posX += KeyFrame[playIndex].incX;
-				posY += KeyFrame[playIndex].incY;
-				posZ += KeyFrame[playIndex].incZ;
-
-				rotRodIzq += KeyFrame[playIndex].rotInc;
-
-				i_curr_steps++;
-			}
-
 		}
+		if (recorrido2)
+		{
+			rotKit_a = 90;
+			movKitX_a += 0.4f;
+			if (movKitX_a > 45)
+			{
+				recorrido2 = false;
+				recorrido3 = true;
+
+			}
+		}
+		
+		if (recorrido3)
+		{
+			rotKit_a = 180;
+			movKitZ_a -= 0.4f;
+			if (movKitZ_a < -45)
+			{
+				recorrido3 = false;
+				recorrido4 = true;
+			}
+		}
+		if (recorrido4)
+		{
+			rotKit_a = 270;
+			movKitX_a -= 0.4f;
+			if (movKitX_a < 0)
+			{
+				recorrido4 = false;
+				recorrido5 = true;
+			}
+		}
+		if (recorrido5)
+		{
+			rotKit_a = 0;
+			movKitZ_a += 0.4f;
+			if (movKitZ_a > 5)
+			{
+				recorrido5 = false;
+				recorrido6 = true;
+			}
+		}
+		if (recorrido6)
+		{
+			rotKit_a = -90;
+			movKitX_a -= 0.4f;
+			if (movKitX_a < -15)
+			{
+				recorrido6= false;
+				recorrido7 = true;
+			}
+		}
+		if (recorrido7)
+		{
+			rotKit_a = 180;
+			movKitZ_a -= 0.4f;
+			if (movKitZ_a < -45)
+			{
+				recorrido7 = false;
+				recorrido8 = true;
+			}
+		}
+		/*if (recorrido8)
+		{
+			rotKit_a = 90;
+			movKitX_a += 0.1f;
+			if (movKitX_a > 0)
+			{
+				recorrido8 = false;
+				recorrido9 = true;
+
+			}
+		}
+		if (recorrido9)
+		{
+			rotKit_a = 0;
+			movKitX_a += 0.1f;
+			if (movKitX_a > 0)
+			{
+				recorrido9 = false;
+				recorrido1 = true;
+
+			}
+		}
+		if (recorrido10)
+		{
+			rotKit_a = 0;
+			movKitZ_a += 0.1f;
+			if (movKitZ_a > 15)
+			{
+				recorrido10 = false;
+				recorrido1 = true;
+			}
+		}*/
+		if (recorrido8)
+		{
+			rotKit_a = 90;
+			movKitX_a += 0.4f;
+			if (movKitX_a > 0)
+			{
+				recorrido8 = false;
+				recorrido9 = true;
+
+			}
+		}
+		if (recorrido9)
+		{
+			rotKit_a = 135;
+			movKitX_a += 0.2f;
+			if (movKitX_a > 9)
+			{
+				recorrido9 = false;
+				recorrido10 = true;
+
+			}
+		}
+
+		if (recorrido10)
+		{
+			printf("Inicia recorrido 10");
+			printf("X %f", movKitX_a);
+			printf("Z %f", movKitZ_a);
+			rotKit_a = 135;
+			movKitX_a += 0.1f;
+			movKitZ_a -= 0.1f;
+			if (movKitZ_a > -50)
+			{
+				recorrido10 = false;
+				recorrido11 = true;
+
+			}
+		}
+		if (recorrido11)
+		{
+			rotKit_a = 225;
+			movKitZ_a -= 0.1f;
+			if (movKitZ_a < -55)
+			{
+				recorrido11 = false;
+				recorrido12 = true;
+			}
+		}
+		if (recorrido12)
+		{
+			rotKit_a = -90;
+			movKitX_a -= 0.1f;
+			movKitZ_a -= 0.1f;
+			if (movKitX_a < 9)//si no jala cambiar a menor
+			{
+				recorrido12 = false;
+				recorrido13 = true;
+
+			}
+		}
+		if (recorrido13)
+		{
+			rotKit_a = -45;
+			movKitX_a -= 0.1f;
+			if (movKitX_a < 4)
+			{
+				recorrido13 = false;
+				recorrido14 = true;
+			}
+		}
+		if (recorrido14)
+		{
+			rotKit_a = 0;
+			movKitX_a -= 0.1f;
+			movKitZ_a += 0.1f;
+			if (movKitX_a < -1)
+			{
+				recorrido14 = false;
+				recorrido15 = true;
+
+			}
+		}
+		if (recorrido15)
+		{
+			rotKit_a = 0;
+			movKitZ_a += 0.4f;
+			if (movKitZ_a > 0)
+			{
+				recorrido15 = false;
+				recorrido16 = true;
+			}
+		}
+		if (recorrido16)
+		{
+			rotKit_a = 0;
+			movKitZ_a += 0.4f;
+			if (movKitZ_a > 15)
+			{
+				recorrido16 = false;
+				recorrido1 = true;
+			}
+		}
+	
+
 	}
+}
 
 
 // Is called whenever a key is pressed/released via GLFW
@@ -1277,8 +1483,17 @@ void DoMovement()
 			printf("ventanas cuartos pequeños %f\n", mov_vet_sup);
 		}
 	}
+	
 
+	if (keys[GLFW_KEY_I])
+	{
+		circuito = true;
+	}
 
+	if (keys[GLFW_KEY_O])
+	{
+		circuito = false;
+	}
 
 	// Camera controls
 	if (keys[GLFW_KEY_W] || keys[GLFW_KEY_UP])
